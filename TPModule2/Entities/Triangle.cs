@@ -32,11 +32,11 @@ namespace TPModule2.Entities
 			set { c = value; }
 		}
 
-		private double p => (A + B + C) / 2d;
+		private double p => (A + B + C) / 2.0d;
 
 		public override double Aire => Math.Sqrt(p * (p - A) * (p - B) * (p - C));
 
-		public override double Perimetre => A + B + C;
+		public override double? Perimetre => A + B + C;
 
 		public override string ToString()
 		{

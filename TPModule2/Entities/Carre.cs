@@ -17,11 +17,11 @@ namespace TPModule2.Entities
 			StringBuilder builder = new StringBuilder();
 			builder.Append("Carré de côté = ");
 			builder.Append(Longueur);
-			Console.WriteLine(builder.ToString());
+			//Console.WriteLine(builder.ToString());
 
-			Console.WriteLine(String.Format("Carré de côté = {0} \n {1}", Longueur, base.ToString()));
+			//Console.WriteLine(String.Format("Carré de côté = {0} \n {1}", Longueur, base.ToString()));
 
-			Console.WriteLine($"Carré de côté = {Longueur} \n {base.ToString()}");
+			//Console.WriteLine($"Carré de côté = {Longueur} \n {base.ToString()}");
 
 			return "Carré de côté = " + Longueur + "\n" + base.ToString();
 		}

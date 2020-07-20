@@ -26,11 +26,18 @@ namespace TPModule2.Entities
 
 		public override double Aire => Largeur * Longueur;
 
-		public override double Perimetre => 2 * Largeur + 2 * Longueur;
+		public override double? Perimetre => 2 * Largeur + 2 * Longueur;
 
 		public override string ToString()
 		{
-			return "Rectangle de longueur = " + Longueur + " et largeur = " + Largeur + "\n" + base.ToString();
+			if (this is Carre)
+			{
+				return base.ToString();
+			}
+			else
+			{
+				return "Rectangle de longueur = " + Longueur + " et largeur = " + Largeur + "\n" + base.ToString();
+			}
 		}
 	}
 }
