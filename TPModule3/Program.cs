@@ -60,6 +60,10 @@ namespace TPModule3
                 .OrderByDescending(g => g.Count())
                 .FirstOrDefault();
 
+            //IGrouping<Auteur, Livre> auteurQ2 = FakeDb.Instance.ListeLivres
+            //    .GroupBy(l => l.Auteur)
+            //    .FirstOrDefault(g => g.Count() == l.Max(g.Count());
+
             Console.WriteLine("Q2 :");
             Console.WriteLine($"{auteurQ2.Key.Nom} {auteurQ2.Key.Prenom}");
 
@@ -68,11 +72,17 @@ namespace TPModule3
 
             //Afficher le nombre moyen de pages par livre par auteur
             Console.WriteLine("Q3 :");
-            foreach (var groupingAuteurLivre in FakeDb.Instance.ListeLivres.GroupBy(l => l.Auteur))
+            foreach (IGrouping<Auteur,Livre> groupingAuteurLivre in FakeDb.Instance.ListeLivres.GroupBy(l => l.Auteur))
             {
                 Console.WriteLine($"{groupingAuteurLivre.Key.Nom} {groupingAuteurLivre.Key.Prenom}");
                 Console.WriteLine($"Moyenne des pages = {groupingAuteurLivre.Average(l => l.NbPages)}");
             }
+
+            //FakeDb.Instance.ListeLivres.GroupBy(l => l.Auteur).ToList().ForEach((s) => 
+            //{
+            //    Console.WriteLine($"{s.Key.Nom} {s.Key.Prenom}");
+            //    Console.WriteLine($"Moyenne des pages = {s.Average(l => l.NbPages)}");
+            //});
 
             Console.ReadKey();
             Console.WriteLine();
@@ -123,6 +133,11 @@ namespace TPModule3
 
             // Afficher les titres de tous les livres triés par ordre alphabétique
             Console.WriteLine("Q7 :");
+            //Func<string, string> f1 = (item) => 
+            //{
+            //    return item; 
+            //};
+            // t => t
             List<String> titreQ7s = FakeDb.Instance.ListeLivres.Select(l => l.Titre).OrderBy(t => t).ToList();
             foreach (var item in titreQ7s)
             {
