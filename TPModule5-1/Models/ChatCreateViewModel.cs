@@ -8,7 +8,7 @@ namespace TPModule5_1.Models
     public class ChatCreateViewModel
     {
         public Chat Chat { get; set; }
-        public List<Couleur> Couleurs { get; } = new List<Couleur>();
+        public List<Couleur> Couleurs { get; set; }
         public int IdCouleur { get; set; }
     }
 }

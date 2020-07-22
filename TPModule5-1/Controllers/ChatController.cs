@@ -11,19 +11,19 @@ namespace TPModule5_1.Controllers
 {
     public class ChatController : Controller
     {
+        //private static List<Chat> chats = Chat.GetMeuteDeChats();
+
         // GET: Chat
         public ActionResult Index()
         {
+            //return View(chats);
             return View(FakeDbCat.Instance.Chats);
         }
 
         public ActionResult Create()
         {
             ChatCreateViewModel vm = new ChatCreateViewModel();
-            vm.Couleurs.Add(new Couleur() { Id = 1, Name = "Blanc" });
-            vm.Couleurs.Add(new Couleur() { Id = 2, Name = "Noir" });
-            vm.Couleurs.Add(new Couleur() { Id = 3, Name = "Rouge" });
-            vm.Couleurs.Add(new Couleur() { Id = 4, Name = "Bleu" });
+            vm.Couleurs = FakeDbCat.Instance.Couleurs;
             return View(vm);
         }
 
@@ -32,11 +32,8 @@ namespace TPModule5_1.Controllers
         {
             try
             {
-                vm.Couleurs.Add(new Couleur() { Id = 1, Name = "Blanc" });
-                vm.Couleurs.Add(new Couleur() { Id = 2, Name = "Noir" });
-                vm.Couleurs.Add(new Couleur() { Id = 3, Name = "Rouge" });
-                vm.Couleurs.Add(new Couleur() { Id = 4, Name = "Bleu" });
-                vm.Chat.Couleur = vm.Couleurs.FirstOrDefault(x => x.Id == vm.IdCouleur);
+                //vm.Couleurs = FakeDbCat.Instance.Couleurs;
+                vm.Chat.Couleur = FakeDbCat.Instance.Couleurs.FirstOrDefault(x => x.Id == vm.IdCouleur);
                 FakeDbCat.Instance.Chats.Add(vm.Chat);
                 return RedirectToAction("Index");
             }
@@ -44,8 +41,6 @@ namespace TPModule5_1.Controllers
             {
                 return View(vm);
             }
-            
-            
         }
 
         // GET: Chat/Details/5
@@ -89,7 +84,7 @@ namespace TPModule5_1.Controllers
             }
             catch
             {
-                return View();
+                return View(id);
             }
         }
     }
