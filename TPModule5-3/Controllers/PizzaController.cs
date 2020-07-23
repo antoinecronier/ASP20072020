@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TPModule5_2.Models;
-using TPModule5_2_BO.Utils;
-using TPModule5_2_BO;
+using TPModule5_3.Models;
+using TPModule5_3.Utils;
+using TPModule5_3_BO;
+using TPModule5_3.Annotations;
 
-namespace TPModule5_2.Controllers
+namespace TPModule5_3.Controllers
 {
     public class PizzaController : Controller
     {
@@ -39,7 +40,7 @@ namespace TPModule5_2.Controllers
         {
             try
             {
-                if (ModelState.IsValid && ValidateVM(vm))
+                if (ModelState.IsValid && /*this.ValidateVM(vm)*/vm.Validate(ModelState))
                 {
                     Pizza pizza = vm.Pizza;
 
@@ -61,8 +62,8 @@ namespace TPModule5_2.Controllers
                 else
                 {
                     vm.Pates = FakeDb.Instance.PatesDisponible.Select(
-                        x => new SelectListItem { Text = x.Nom, Value = x.Id.ToString() })
-                        .ToList();
+                x => new SelectListItem { Text = x.Nom, Value = x.Id.ToString() })
+                .ToList();
 
                     vm.Ingredients = FakeDb.Instance.IngredientsDisponible.Select(
                         x => new SelectListItem { Text = x.Nom, Value = x.Id.ToString() })
@@ -88,6 +89,47 @@ namespace TPModule5_2.Controllers
        private bool ValidateVM(PizzaViewModel vm)
         {
             bool result = true;
+
+            if (vm.IdsIngredients.Count < 2 || vm.IdsIngredients.Count > 5)
+            {
+                ModelState.AddModelError("IdsIngredients", "Il faut sélectionner entre 2 et 5 ingredients");
+                result = false;
+            }
+
+            if (FakeDb.Instance.Pizzas.FirstOrDefault(x => x.Nom == vm.Pizza.Nom) != null)
+            {
+                ModelState.AddModelError("Pizza.Nom.AlreadyExists", "Il existe déjà une pizza avec ce nom");
+                result = false;
+            }
+
+            //foreach (var pizza in FakeDb.Instance.Pizzas)
+            //{
+            //    if (vm.IdsIngredients.Count == pizza.Ingredients.Count)
+            //    {
+            //        bool isDifferent = false;
+            //        List<Ingredient> pizzaDb = pizza.Ingredients.OrderBy(x => x.Id).ToList();
+            //        vm.IdsIngredients = vm.IdsIngredients.OrderBy(x => x).ToList();
+            //        for (int i = 0; i < vm.IdsIngredients.Count; i++)
+            //        {
+            //            if (vm.IdsIngredients.ElementAt(i) != pizzaDb.ElementAt(i).Id)
+            //            {
+            //                isDifferent = true;
+            //                break;
+            //            }
+            //        }
+
+            //        if (!isDifferent)
+            //        {
+            //            ModelState.AddModelError("Ingredient.AlreadyExists", "Il existe déjà une pizza avec ces ingredients");
+            //            result = false;
+            //        }
+            //    }
+            //}
+            if (FakeDb.Instance.Pizzas.Any(x => x.Ingredients.Select(y => y.Id).OrderBy(z => z).SequenceEqual(vm.IdsIngredients.Select(y => int.Parse(y.ToString())).OrderBy(z => z))))
+            {
+                ModelState.AddModelError("Ingredient.AlreadyExists", "Il existe déjà une pizza avec ces ingredients");
+                result = false;
+            }
             return result;
         }
 
