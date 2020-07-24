@@ -57,6 +57,8 @@ namespace TPModule5_3.Annotations
 
         public bool Validate(object item, PropertyInfo property, bool result, ModelStateDictionary modelState, List<Pizza> referedList)
         {
+            result = this.Validate(item, property, result, modelState);
+
             if (actions.Contains(CheckerAction.NotSame))
             {
                 result = NotSame(item, property, result, modelState, referedList);
@@ -70,7 +72,7 @@ namespace TPModule5_3.Annotations
             PropertyInfo propertyToUse;
             object itemToUse;
             AssignDatas(item, property, out propertyToUse, out itemToUse);
-            List<object> items = propertyToUse.GetValue(itemToUse) as List<object>;
+            List<int> items = propertyToUse.GetValue(itemToUse) as List<int>;
 
             if (referedList.Any(x => x.Ingredients.Select(y => y.Id).OrderBy(z => z).SequenceEqual(items.Select(y => int.Parse(y.ToString())).OrderBy(z => z))))
             {

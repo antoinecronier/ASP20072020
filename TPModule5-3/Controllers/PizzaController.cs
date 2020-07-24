@@ -40,7 +40,7 @@ namespace TPModule5_3.Controllers
         {
             try
             {
-                if (ModelState.IsValid && /*this.ValidateVM(vm)*/vm.Validate(ModelState))
+                if (ModelState.IsValid && /*this.ValidateVM(vm)*/vm.Validate(ModelState, FakeDb.Instance.Pizzas))
                 {
                     Pizza pizza = vm.Pizza;
 
@@ -49,9 +49,6 @@ namespace TPModule5_3.Controllers
                     pizza.Ingredients = FakeDb.Instance.IngredientsDisponible.Where(
                         x => vm.IdsIngredients.Contains(x.Id))
                         .ToList();
-
-                    // Insuffisant
-                    //pizza.Id = FakeDb.Instance.Pizzas.Count + 1;
 
                     pizza.Id = FakeDb.Instance.Pizzas.Count == 0 ? 1 : FakeDb.Instance.Pizzas.Max(x => x.Id) + 1;
 
@@ -72,8 +69,9 @@ namespace TPModule5_3.Controllers
                     return View(vm);
                 }
             }
-            catch
+            catch(Exception e)
             {
+                throw e;
                 vm.Pates = FakeDb.Instance.PatesDisponible.Select(
                 x => new SelectListItem { Text = x.Nom, Value = x.Id.ToString() })
                 .ToList();
