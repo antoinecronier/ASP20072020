@@ -71,7 +71,6 @@ namespace TPModule5_3.Controllers
             }
             catch(Exception e)
             {
-                throw e;
                 vm.Pates = FakeDb.Instance.PatesDisponible.Select(
                 x => new SelectListItem { Text = x.Nom, Value = x.Id.ToString() })
                 .ToList();
@@ -123,7 +122,7 @@ namespace TPModule5_3.Controllers
             //        }
             //    }
             //}
-            if (FakeDb.Instance.Pizzas.Any(x => x.Ingredients.Select(y => y.Id).OrderBy(z => z).SequenceEqual(vm.IdsIngredients.Select(y => int.Parse(y.ToString())).OrderBy(z => z))))
+            if (FakeDb.Instance.Pizzas.Any(x => x.Ingredients.Select(y => y.Id).OrderBy(z => z).SequenceEqual(vm.IdsIngredients.OrderBy(z => z))))
             {
                 ModelState.AddModelError("Ingredient.AlreadyExists", "Il existe déjà une pizza avec ces ingredients");
                 result = false;
