@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Class1Controller.cs" />
+    <Compile Include="Controllers\Class2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +180,11 @@
     <Content Include="Views\Class1\Edit.cshtml" />
     <Content Include="Views\Class1\Index.cshtml" />
     <Content Include="Views\Class1\Create.cshtml" />
+    <Content Include="Views\Class2\Create.cshtml" />
+    <Content Include="Views\Class2\Delete.cshtml" />
+    <Content Include="Views\Class2\Details.cshtml" />
+    <Content Include="Views\Class2\Edit.cshtml" />
+    <Content Include="Views\Class2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
