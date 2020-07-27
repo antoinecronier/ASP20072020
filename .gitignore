@@ -1,6 +1,8 @@
 ###################
 # compiled source #
 ###################
+*.ldf
+*.mdf
 *.com
 *.class
 *.dll
