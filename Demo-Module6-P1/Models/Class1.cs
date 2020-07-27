@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -32,6 +33,8 @@ namespace Demo_Module6_P1.Models
 
         public virtual List<Class2> Class2s { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Column(TypeName = "datetime2")]
         public DateTime DayOfBirth { get; set; }
 
