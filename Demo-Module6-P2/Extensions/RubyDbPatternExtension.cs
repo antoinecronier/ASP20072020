@@ -10,19 +10,12 @@ namespace Demo_Module6_P2.Extensions
 {
     public static class RubyDbPatternExtension
     {
-        public static void Save(this object item)
+        public static void Save(this DbItem item)
         {
-            if (item is DbItem)
+            using (var db = new DemoDbContext())
             {
-                using (var db = new DemoDbContext())
-                {
-                    db.Entry(item).State = System.Data.Entity.EntityState.Added;
-                    db.SaveChanges();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Cannot save object of type " + item.GetType().FullName);
+                db.Entry(item).State = System.Data.Entity.EntityState.Added;
+                db.SaveChanges();
             }
         }
     }

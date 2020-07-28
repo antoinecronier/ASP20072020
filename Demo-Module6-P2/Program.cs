@@ -39,19 +39,21 @@ namespace Demo_Module6_P2
             }
 
             Conducteur conducteur = new Conducteur() { Firstname = "std", Lastname = "std" }; ;
-            //GenericDbManipulation<Conducteur> dbM = new GenericDbManipulation<Conducteur>();
-            //dbM.Do(conducteur);
+            GenericDbManipulation<Conducteur> dbM = new GenericDbManipulation<Conducteur>();
+            dbM.Do(conducteur);
 
-            //GenericDbManipulation<DbItem> dbM1 = new GenericDbManipulation<DbItem>();
-            //dbM1.Do(conducteur);
-            //dbM1.Do(new Voiture());
+            GenericDbManipulation<DbItem> dbM1 = new GenericDbManipulation<DbItem>();
+            dbM1.Do(conducteur);
+            dbM1.Do(new Voiture());
 
-            //GenericDbManipulation2 dbm2 = new GenericDbManipulation2();
-            //dbm2.Do(conducteur);
-            //(string, string) item2 = ("test", "prop2");
-            //dbm2.Do(item2);
+            GenericDbManipulation2 dbm2 = new GenericDbManipulation2();
+            dbm2.Do(conducteur);
+            (string, string) item2 = ("test", "prop2");
+            dbm2.Do(item2);
 
             conducteur.Save();
+            //(string, string) item3 = ("test", "prop2");
+            //item3.Save();
         }
 
         private static void ItemManipulation()
