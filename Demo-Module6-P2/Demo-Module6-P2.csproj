@@ -58,6 +58,9 @@
     <Compile Include="Entities\DbItem.cs" />
     <Compile Include="Entities\Trajet.cs" />
     <Compile Include="Entities\Voiture.cs" />
+    <Compile Include="Extensions\RubyDbPatternExtension.cs" />
+    <Compile Include="GenericTest\GenericDbManipulation2.cs" />
+    <Compile Include="GenericTest\GenericDbManipulation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
