@@ -13,5 +13,10 @@ namespace Demo_Module6_P2.Data
         public DbSet<Voiture> Voitures { get; set; }
         public DbSet<Trajet> Trajets { get; set; }
         public DbSet<Conducteur> Conducteurs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Voiture>().HasOptional(x => x.Driver).WithOptionalPrincipal(x => x.Car);
+        }
     }
 }
