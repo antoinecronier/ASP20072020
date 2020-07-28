@@ -16,7 +16,45 @@ namespace Demo_Module6_P2.Data
 
         public DemoDbContext()
         {
+            this.Configuration.LazyLoadingEnabled = false;
 
+            if (this.Database.CreateIfNotExists())
+            {
+                List<Conducteur> conducteurs = new List<Conducteur>();
+                List<Trajet> trajets = new List<Trajet>();
+                List<Voiture> voitures = new List<Voiture>();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    conducteurs.Add(new Conducteur() { Lastname = "l" + i, Firstname = "f" + i });
+                }
+
+                this.Conducteurs.AddRange(conducteurs);
+                this.SaveChanges();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    trajets.Add(new Trajet() { Name = "trajet " + i });
+                }
+
+                this.Trajets.AddRange(trajets);
+                this.SaveChanges();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    voitures.Add(new Voiture()
+                    {
+                        Kilometers = 10 * i,
+                        Name = "voiture " + i,
+                        Driver = conducteurs.ElementAt(i),
+                        CommonRides = new List<Trajet>() { trajets.ElementAt(i) },
+                        Rides = new List<Trajet>() { trajets.ElementAt(0) }
+                    });
+                }
+
+                this.Voitures.AddRange(voitures);
+                this.SaveChanges();
+            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
