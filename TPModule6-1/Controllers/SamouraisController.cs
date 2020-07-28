@@ -126,6 +126,7 @@ namespace TPModule6_1.Controllers
 
                 db.Entry(currentSamourai).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
