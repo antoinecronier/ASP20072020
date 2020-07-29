@@ -38,7 +38,7 @@ namespace TPModule6_2.Controllers
             return View(item);
         }
 
-        public ActionResult Create()
+        public virtual ActionResult Create()
         {
             TVM vm = new TVM();
             this.LoadVMCreate(vm);
@@ -47,7 +47,7 @@ namespace TPModule6_2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(TVM vm)
+        public virtual ActionResult Create(TVM vm)
         {
             if (ModelState.IsValid)
             {
@@ -103,12 +103,9 @@ namespace TPModule6_2.Controllers
             return db.Set<T>().Find(id) as TVM;
         }
 
-        // POST: ArtMartials/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TVM vm)
+        public virtual ActionResult Edit(TVM vm)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +115,7 @@ namespace TPModule6_2.Controllers
                 return RedirectToAction("Index");
             }
 
-            this.LoadVMCreate(vm);
+            this.LoadVMEdit(vm);
             return View(vm);
         }
 
@@ -127,7 +124,7 @@ namespace TPModule6_2.Controllers
 
         }
 
-        public ActionResult Delete(int? id)
+        public virtual ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -152,7 +149,7 @@ namespace TPModule6_2.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public virtual ActionResult DeleteConfirmed(int id)
         {
             T item = db.Set<T>().Find(id);
             this.PreDeleteAction(item);

@@ -9,7 +9,18 @@
 
 <h2>Create</h2>
 
-@Html.GenerateForm(Html.FormBaseContent("Arme",Html.AddAttributs(typeof(Arme), "", Model, false, new string[] { "Id" }, new String[] { }, null).ToString(), "Create").ToString())
+@Html.GenerateForm(
+    Html.FormBaseContent(
+        "Arme",
+        Html.AddAttributs(
+            typeof(Arme), 
+            "", 
+            Model, 
+            false, 
+            new string[] { "Id" }, 
+            new String[] { }, 
+            null).ToString(), 
+        "Create").ToString())
 
 @*-----------------------
 
