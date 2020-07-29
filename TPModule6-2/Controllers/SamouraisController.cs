@@ -121,7 +121,7 @@ namespace TPModule6_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentSamourai = db.Samourais.Find(vm.Samourai.Id);
+                var currentSamourai = db.Samourais.Include(x => x.Arme).FirstOrDefault(x => x.Id == vm.Samourai.Id);
                 //db.Samourais.Include(x => x.ArtMartials).FirstOrDefault(x => x.Id == vm.Samourai.Id);
                 currentSamourai.Force = vm.Samourai.Force;
                 currentSamourai.Nom = vm.Samourai.Nom;
